@@ -1,6 +1,6 @@
 # Projet Steamy: Conception d’un robot Contrôleur statique
+<img src="TIA/kitsteamy.jpg" alt="starter" width="300"/>
 
-![starter](./TIA/kitsteamy.jpg)
 
 ## Sommaire
 
@@ -31,40 +31,42 @@ Le système démarre avec un appui sur le bouton poussoir BP1. Une fois en march
 
 - **Steamy starter** : Ensemble de carte Arduino Uno et d’un shield Arduino Uno.
   
-![STEAMY](./Saved%20Pictures/steamy.jpg)
+<img src="Saved%20Pictures/steamy.jpg" alt="steamy" width="300"/>
 
 - **Capteur d’ultrasons** : Il mesure la distance d’un obstacle et avertit l’opérateur avec des signaux lumineux.
   
-![Capteur Ultrason](./Saved%20Pictures/ultrason.jpg)
+<img src="Saved%20Pictures/ultrason.jpg" alt="steamy" width="300"/>
 
 - **Capteur d’humidité** : Détecte la présence d'eau dans le laboratoire.
   
-![Capteur Humidité](./Saved%20Pictures/Dht.jpg)
+<img src="Saved%20Pictures/Dht.jpg" alt="steamy" width="300"/>
 
 - **Ecran LCD** : Affiche des messages en temps réel sur l'état du système.
   
-![Ecran LCD](./Saved%20Pictures/lcd.jpg)
 
+<img src="Saved%20Pictures/lcd.jpg" alt="steamy" width="300"/>
 - **Télécommande IR** : Permet de déclencher des jeux de lumières sur la LED RGB en cas de défaut prolongé.
-  
-![telecommande](./Saved%20Pictures/telecommande.jpg)
+
+  <img src="Saved%20Pictures/telecommande.jpg" alt="steamy" width="300"/>
 
 - **Les LEDs** :  servent à indiquer l’état du système
-  ![leds](./Saved%20Pictures/ledRg.jpg)
+
+  <img src="Saved%20Pictures/ledRg.jpg" alt="steamy" width="300"/>
 
 - **La led RGB** :   indique la distance de l’obstacle détecté par le capteur ultrason en 
 changeant de couleur (vert, orange, rouge)
 
-  ![ledrgb](./Saved%20Pictures/rgb.jpg)
+  <img src="Saved%20Pictures/rgb.jpg" alt="steamy" width="300"/>
 
 - **Le buzzer** :  Il émet un son pour alerter l’opérateur lorsqu'un problème persiste pendant plus de 3 minutes
 sans être résolu.
 
-  ![buzzer](./Saved%20Pictures/buzzer.jpg)
+ <img src="Saved%20Pictures/buzzer.jpg" alt="steamy" width="300"/>
 
 - **Boutton poussoir** :  Ils permettent à l’opérateur d’interagir avec le système
+
+  <img src="Saved%20Pictures/ledRg.jpg" alt="steamy" width="300"/>
   
-  ![buttons](./Saved%20Pictures/ledRg.jpg)
 
 ### b. Outil logiciel
 Pour ce projet nous utiliserons l’IDE Arduino. C’est une application multiplateforme qui est écrite dans des fonctions de C et C++. Il est utilisé pour écrire et télécharger des programmes sur des cartes compatibles Arduino. Il fournit plusieurs bibliothèques sous forme de classes (programmation orienté objet) qui sont utilisées notamment pour les différents capteurs et modules compatibles avec Arduino. Il utilise le programme avrdude pour convertir le code exécutable en un fichier texte au codage hexadécimal qui est chargé dans la carte Arduino par un programme de chargement dans le firmware de la carte.
@@ -72,14 +74,16 @@ Téléchargez et installez à l’adresse web [ici](https://www.arduino.cc/en/so
 * N.B. : Veuillez à télécharger et installer l'IDE Arduino compatible avec votre système 
 d'exploitation
 Après installation vous devrez obtenues l’interface suivante
- ![ide](./TIA/ideArduino.png)
+
+<img src="TIA/ideArduino.jpg" alt="starter" width="300"/>
 ---
 
 ## C- Installation et configuration
 
 ### a. Montage physique
 Le Shield facilite le montage, il relie les différents composants du circuit aux pins associés sur la carte Arduino.
-![montage](./Saved%20Pictures/steamy_montage.jpg)
+
+<img src="Saved%20Pictures/steamy_montage.jpg" alt="steamy" width="300"/>
 ### b. Configuration logicielle
 Des bibliothèques comme `LiquidCrystal_I2C`, `DHT`, et `IRremote` sont nécessaires pour le bon fonctionnement du programme.
 
@@ -88,18 +92,16 @@ Des bibliothèques comme `LiquidCrystal_I2C`, `DHT`, et `IRremote` sont nécessa
 ## D- Fonctionnement du code
 
 Le programme qui gouverne ce système peut être subdivisé en trois parties essentielles. Un programme Arduino est constitué de deux fonctions indispensables setup et loop. Mais avant cela il faut définir certains éléments. Nous commençons donc par établir les données de base:
-![ide](./TIA/biblio.png)
+
 
 La seconde étape importante est la conception de la fonction setup(). On y retrouve toutes les configurations de bases du programme.
-![ide](./TIA/setup.png)
+
 
 La troisième étape est la conception de la fonction loop() qui est une boucle infinie. Elle est ici constituée de deux principales boucles qui ne peuvent s’exécuter qu’après que la variable 11BP1 passe à l’état bas. La première boucle présentée ici-bas ré exécute la fonction system_good() qui présente toutes les caractéristiques du système en bonne fonction avec les conditions de redémarrage et d’arrêt.
-![ide](./TIA/good.png)
+
 
 La deuxième partie de cette dernière étape est également une boucle qui s’exécute dans les cas relatifs aux défauts
-![ide](./TIA/default1.png)
 
-![ide](./TIA/default2.png)
 
 Le programme entier est constitué de plusieurs fonctions qui interagissent dans la fonction 
 loop pour la bonne marche du système.
@@ -132,7 +134,8 @@ Un appui long sur BP2 permet d'éteindre complètement le système.
 ## Résultat attendu
 Une fois en marche, la LED verte indique que le système fonctionne sans problème et l'écran affiche Pret !.
 
-![steamy](Saved%20Pictures/pret.jpg)
+<img src="Saved%20Pictures/pret.jpg" alt="steamy" width="300"/>
+
 
 Pour avoir plus d'informations sur Techitall [Visiter TIA](https://techitall.co)
 
