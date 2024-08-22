@@ -1,5 +1,7 @@
 # Projet Steamy: Conception d’un robot Contrôleur statique
 
+![starter](./TIA/kitsteamy.jpg)
+
 ## Sommaire
 
 - [A- Présentation du projet](#A-Présentation-du-projet)
@@ -70,7 +72,7 @@ Téléchargez et installez à l’adresse web [ici](https://www.arduino.cc/en/so
 * N.B. : Veuillez à télécharger et installer l'IDE Arduino compatible avec votre système 
 d'exploitation
 Après installation vous devrez obtenues l’interface suivante
- [ide](./TIA/ideArduino.png)
+ ![ide](./TIA/ideArduino.png)
 ---
 
 ## C- Installation et configuration
@@ -86,18 +88,18 @@ Des bibliothèques comme `LiquidCrystal_I2C`, `DHT`, et `IRremote` sont nécessa
 ## D- Fonctionnement du code
 
 Le programme qui gouverne ce système peut être subdivisé en trois parties essentielles. Un programme Arduino est constitué de deux fonctions indispensables setup et loop. Mais avant cela il faut définir certains éléments. Nous commençons donc par établir les données de base:
-[ide](./TIA/biblio.png)
+![ide](./TIA/biblio.png)
 
 La seconde étape importante est la conception de la fonction setup(). On y retrouve toutes les configurations de bases du programme.
-[ide](./TIA/setup.png)
+![ide](./TIA/setup.png)
 
 La troisième étape est la conception de la fonction loop() qui est une boucle infinie. Elle est ici constituée de deux principales boucles qui ne peuvent s’exécuter qu’après que la variable 11BP1 passe à l’état bas. La première boucle présentée ici-bas ré exécute la fonction system_good() qui présente toutes les caractéristiques du système en bonne fonction avec les conditions de redémarrage et d’arrêt.
-[ide](./TIA/good.png)
+![ide](./TIA/good.png)
 
 La deuxième partie de cette dernière étape est également une boucle qui s’exécute dans les cas relatifs aux défauts
-[ide](./TIA/default1.png)
+![ide](./TIA/default1.png)
 
-[ide](./TIA/default2.png)
+![ide](./TIA/default2.png)
 
 Le programme entier est constitué de plusieurs fonctions qui interagissent dans la fonction 
 loop pour la bonne marche du système.
