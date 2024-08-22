@@ -8,6 +8,7 @@ fournissant des alertes appropriées. Le projet met en œuvre plusieurs composan
 # STEAMY STARTER
 Steamy starter est un ensemble de carte Arduino Uno et d’un shield Arduino Uno sur lequel il 
 y a plusieurs composants électroniques.
+![steamy](Saved%20Pictures/steamy.jpg)
 
 # PRE-REQUIS
   ## Matériels nécéssaires 
@@ -22,6 +23,8 @@ y a plusieurs composants électroniques.
    - DHT
    - IRremote
 # Montage
+![steamy](Saved%20Pictures/steamy_montage.jpg)
+
 # Fonctionnement du système
   ## 1. Démarrage du système
 
@@ -53,3 +56,7 @@ y a plusieurs composants électroniques.
   - **Bouton poussoir BP2** : Un appui simple sur le bouton poussoir BP2 permet de redémarrer le système après l'acquittement des défauts. Si l'on appuie longuement sur ce même bouton, le système s'éteint complètement.
   
 # Resultat  
+![steamy](Saved%20Pictures/pret.jpg)
+
+Pour avoir plus d'informations sur Techitall [Visiter TIA](https://techitall.co)
+
