@@ -81,7 +81,7 @@ bool controlhumidity(){
 
 bool controlLight() {
   int light_val = analogRead(lightpin);
-  if (light_val > 800){ //>500
+  if (light_val > 500){ //>500
     return 1;
   }else{
     return 0;
