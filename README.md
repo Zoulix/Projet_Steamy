@@ -228,7 +228,7 @@ startTime = millis();
           }
         }else if (millis() - startTime >=checkInterval){  // 3 minutes
           while(1){
-            digitalWrite(buzzer, HIGH);
+            digitalWrite(buzer, HIGH); // buzzer
             if (buzzerStartTime == 0){
               buzzerStartTime= millis();
             }
@@ -249,6 +249,8 @@ startTime = millis();
       
     }
   }
+  
+
 }
 ```
 
