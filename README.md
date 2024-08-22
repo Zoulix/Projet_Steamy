@@ -75,8 +75,8 @@ Téléchargez et installez à l’adresse web [ici](https://www.arduino.cc/en/so
 d'exploitation
 Après installation vous devrez obtenues l’interface suivante
 
-<img src="TIA/ideArduino.jpg" alt="starter" width="300"/>
----
+<img src="TIA/ideArduino.png" alt="starter" width="300"/>
+
 
 ## C- Installation et configuration
 
@@ -87,20 +87,171 @@ Le Shield facilite le montage, il relie les différents composants du circuit au
 ### b. Configuration logicielle
 Des bibliothèques comme `LiquidCrystal_I2C`, `DHT`, et `IRremote` sont nécessaires pour le bon fonctionnement du programme.
 
----
 
 ## D- Fonctionnement du code
 
+
 Le programme qui gouverne ce système peut être subdivisé en trois parties essentielles. Un programme Arduino est constitué de deux fonctions indispensables setup et loop. Mais avant cela il faut définir certains éléments. Nous commençons donc par établir les données de base:
 
+```C++
+#include <avr/wdt.h>
+#include <IRremote.hpp>
+#define IR_RECEIVE_PIN 10
+#include "DHT.h"
+#include <Wire.h> 
+#include <LiquidCrystal_I2C.h>
+#define DHTPIN 4 // Digital pin connected to the DHT sensor
+#define DHTTYPE DHT22 // DHT 22 (AM2302), AM2321
+#define lightpin A0
+#define button 13
+#define button_2 2
+#define led_green 12
+#define led_red 11
+#define led_rgb_red 3 
+#define led_rgb_green 5
+#define led_rgb_blue 6
+#define buzzer 9 
+const int trigPin = 7;  // Pin connecté au trig du capteur
+const int echoPin = 8;
+unsigned long startTime;
+unsigned long buzzerStartTime;
+const unsigned long checkInterval = 180000;
+const unsigned long IRInterval = 60000;
+unsigned long buttonPressTime;    // Moment où le bouton est pressé
+unsigned long buttonReleaseTime;  // Moment où le bouton est relâché
+const unsigned long longPressDuration = 2000;
+bool lastatebutton = 0;
+bool BP2;
+DHT dht(DHTPIN, DHTTYPE);
+LiquidCrystal_I2C lcd(0x27,16,2);
 
+```
+
+
+---
 La seconde étape importante est la conception de la fonction setup(). On y retrouve toutes les configurations de bases du programme.
-
+```C++
+void setup() {
+  dht.begin();
+  pinMode(lightpin, INPUT);
+  pinMode(button, INPUT);
+  pinMode(button_2, INPUT);
+  pinMode(led_green, OUTPUT);
+  pinMode(led_red, OUTPUT);
+  lcd.init();
+  lcd.backlight();
+  pinMode(led_rgb_red, OUTPUT);
+  pinMode(led_rgb_blue, OUTPUT);
+  pinMode(led_rgb_green, OUTPUT);
+  pinMode(buzzer, OUTPUT);
+  buzzerStartTime=0;
+  Serial.begin(9600);
+  
+}
+```
 
 La troisième étape est la conception de la fonction loop() qui est une boucle infinie. Elle est ici constituée de deux principales boucles qui ne peuvent s’exécuter qu’après que la variable 11BP1 passe à l’état bas. La première boucle présentée ici-bas ré exécute la fonction system_good() qui présente toutes les caractéristiques du système en bonne fonction avec les conditions de redémarrage et d’arrêt.
 
+```C++
+void loop() {
+  bool BP1 =digitalRead(button);
+ // Serial.println(controlhumidity());
+ // Serial.println(controlLight());
+  //delay(1000);
+  if (BP1 == 0){
+   
+    while(controlhumidity() && controlLight()){
+        BP2 = digitalRead(button_2);
+        if ((BP2 == 1) && (lastatebutton == 0)) {
+          buttonPressTime = millis();
+        }
+        if ((BP2 == 0) && (lastatebutton == 1)){
+          buttonReleaseTime = millis();
+          unsigned long Timepress = buttonReleaseTime-buttonPressTime;
+          if (Timepress < longPressDuration) {
+            systemRestart();
+          } else {
+            systemStop();
+          }
+        }
+        lastatebutton = BP2;
+        system_good();
+    }
+```
 
 La deuxième partie de cette dernière étape est également une boucle qui s’exécute dans les cas relatifs aux défauts
+
+
+```C++
+startTime = millis();
+      while(1){
+        digitalWrite(led_green, LOW);
+        digitalWrite(led_red, HIGH);
+
+        BP2 = digitalRead(button_2);
+        if ((BP2 == 1) && (lastatebutton == 0)) {
+          buttonPressTime = millis();
+        }
+        if ((BP2 == 0) && (lastatebutton == 1)){
+          buttonReleaseTime = millis();
+          unsigned long Timepress = buttonReleaseTime-buttonPressTime;
+          if (Timepress < longPressDuration) {
+            systemRestart();
+          } else {
+            systemStop();
+          }
+        }
+        lastatebutton = BP2;
+       
+        if (controlhumidity() == 0){
+          lcd.clear();
+          lcd.setCursor(0,0);
+          lcd.print("ATTENTION");
+          lcd.setCursor(0,1);
+          lcd.print("ELECTROCUTION");
+          delay(1000);
+        }
+        if (controlLight() == 0){
+          lcd.clear();
+          lcd.setCursor(0,0);
+          lcd.print("ATTENTION");
+          lcd.setCursor(0,1);
+          lcd.print("ACCIDENT");
+          delay(1000);
+        }
+        bool BP_1 = digitalRead(button);
+        if (controlhumidity() && controlLight()){
+          if (BP_1 == 0){
+            while(controlhumidity() && controlLight()){
+                system_good();
+            }
+          }
+        }else if (millis() - startTime >=checkInterval){  // 3 minutes
+          while(1){
+            digitalWrite(buzzer, HIGH);
+            if (buzzerStartTime == 0){
+              buzzerStartTime= millis();
+            }
+            if (millis() - buzzerStartTime >= IRInterval){ //1 minute
+                IrReceiver.begin(IR_RECEIVE_PIN, ENABLE_LED_FEEDBACK);
+                while(1){
+                  if (IrReceiver.decode()){
+                    if (IrReceiver.decodedIRData.decodedRawData == 0xBA45FF00){
+                      telecommandeIR(); // à faire
+                    }
+                  }
+                }
+             }
+          }
+        }else{
+          
+        }
+      
+    }
+  }
+}
+```
+
 
 
 Le programme entier est constitué de plusieurs fonctions qui interagissent dans la fonction 
