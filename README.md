@@ -4,11 +4,11 @@
 
 ## Sommaire
 
-- [A- Présentation du projet](#A-Présentation-du-projet)
-- [B- Matériels nécessaires](#B-Matériels-nécessaires)
-- [C- Installation et configuration](#C-Installation-et-configuration)
-- [D- Fonctionnement du code](#D-Fonctionnement-du-code)
-- [E- Procédure d'utilisation](#E-Procédure-d'utilisation)
+- [A- Présentation du projet](#a-Présentation-du-projet)
+- [B- Matériels nécessaires](#b-Matériels-nécessaires)
+- [C- Installation et configuration](#c-Installation-et-configuration)
+- [D- Fonctionnement du code](#d-Fonctionnement-du-code)
+- [E- Procédure d'utilisation](#e-Procédure-d'utilisation)
 
 ---
 
